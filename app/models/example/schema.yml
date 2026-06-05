@@ -1,0 +1,17 @@
+version: 2
+
+models:
+  - name: staging_example
+    description: Minimal staging model for Trino smoke test.
+    columns:
+      - name: id
+        tests:
+          - not_null
+          - unique
+
+  - name: my_model
+    description: Example model built on top of staging_example.
+    columns:
+      - name: id
+        tests:
+          - not_null
