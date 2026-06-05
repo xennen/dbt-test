@@ -1,5 +1,6 @@
 dbt-core==1.9.2
 dbt-trino==1.9.1
-dagster==1.9.6
-dagster-k8s==0.25.6
-dagster-postgres==0.25.6
+dagster==1.13.8
+dagster-celery-k8s==0.29.8
+dagster-k8s==0.29.8
+dagster-postgres==0.29.8

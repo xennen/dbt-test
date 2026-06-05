@@ -2,6 +2,23 @@ import os
 import subprocess
 
 from dagster import Definitions, job, op
+from dagster_celery_k8s import celery_k8s_job_executor
+
+K8S_RUN_CONFIG = {
+    "dagster-k8s/config": {
+        "pod_spec_config": {
+            "node_selector": {"team": "analytics"},
+            "tolerations": [
+                {
+                    "key": "team",
+                    "operator": "Equal",
+                    "value": "analytics",
+                    "effect": "NoSchedule",
+                }
+            ],
+        }
+    }
+}
 
 
 def _run_dbt(command: list[str]) -> None:
@@ -36,12 +53,12 @@ def dbt_show_edna() -> None:
     )
 
 
-@job
+@job(executor_def=celery_k8s_job_executor, tags=K8S_RUN_CONFIG)
 def dbt_debug_job() -> None:
     dbt_debug()
 
 
-@job
+@job(executor_def=celery_k8s_job_executor, tags=K8S_RUN_CONFIG)
 def dbt_show_edna_job() -> None:
     dbt_show_edna()
 
