@@ -17,5 +17,4 @@ clean-targets:
 
 models:
   dbt_test:
-    example:
-      +materialized: view
+    +materialized: ephemeral

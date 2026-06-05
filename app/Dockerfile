@@ -9,6 +9,6 @@ COPY . .
 
 ENV DBT_PROFILES_DIR=/app
 ENV DBT_PROJECT_DIR=/app
+ENV PYTHONPATH=/app
 
-ENTRYPOINT ["dbt"]
-CMD ["--help"]
+CMD ["dbt", "--help"]
